@@ -15,9 +15,9 @@ class TemplateStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        self.rest_api = RestApi(self, "ChallengeTemplate_RestApi",
-                                    rest_api_name="ChallengeTemplate_RestApi",
-                                    description="This is the ChallengeTemplate RestApi",
+        self.rest_api = RestApi(self, "DesafioJoao_RestApi",
+                                    rest_api_name="DesafioJoao_RestApi",
+                                    description="This is the DesafioJoao RestApi",
                                     default_cors_preflight_options=
                                     {
                                         "allow_origins": Cors.ALL_ORIGINS,
@@ -34,7 +34,7 @@ class TemplateStack(Stack):
         }
                                                                )
 
-        self.dynamo_table = TemplateDynamoTable(self, "ChallengeTemplateDynamoTable")
+        self.dynamo_table = TemplateDynamoTable(self, "DesafioJoaoDynamoTable")
 
         ENVIRONMENT_VARIABLES = {
             "STAGE": "DEV",
@@ -50,5 +50,17 @@ class TemplateStack(Stack):
                                         environment_variables=ENVIRONMENT_VARIABLES)
 
 
+        s3_admin_policy = aws_iam.PolicyStatement(
+            effect=aws_iam.Effect.ALLOW,
+            actions=[
+                "s3:*",
+            ],
+            resources=[
+                "*"
+            ]
+        )
 
+        for f in self.lambda_stack.functions_that_need_s3_permissions:
+            f.add_to_role_policy(s3_admin_policy)
+        
         
