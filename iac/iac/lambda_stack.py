@@ -32,7 +32,7 @@ class LambdaStack(Construct):
     def __init__(self, scope: Construct, api_gateway_resource: Resource, environment_variables: dict) -> None:
         super().__init__(scope, "Template_Lambdas")
 
-        self.lambda_layer = lambda_.LayerVersion(self, "ChallengeTemplate_Layer",
+        self.lambda_layer = lambda_.LayerVersion(self, "DesafioJoao_Layer",
                                                  code=lambda_.Code.from_asset("./lambda_layer_out_temp"),
                                                  compatible_runtimes=[lambda_.Runtime.PYTHON_3_9]
                                                  )
