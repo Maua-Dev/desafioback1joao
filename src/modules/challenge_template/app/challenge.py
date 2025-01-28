@@ -7,8 +7,8 @@ ses = boto3.client('ses', region_name="sa-east-1")
 
 BUCKET_NAME = 'challenge-storage-devcommunitymaua'
 OBJECT_KEY = 'kick buttowski.png'
-SOURCE_EMAIL = 'joao@devmaua.com'  
-DESTINATION_EMAILS = ['22.01082-3@maua.br', '21.00410-2@maua.br']
+SOURCE_EMAIL = 'joa@devmaua.com'  
+DESTINATION_EMAILS = ['21.00410-2@maua.br','22.01082-3@maua.br']
 
 
 def compose_email(image_base64):
